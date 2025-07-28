@@ -1,0 +1,52 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffebfa; /* slate-50 */
+}
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 320px;
+    max-height: 320px;
+}
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    font-weight: 500;
+    color: #475569; /* slate-600 */
+}
+.nav-link:hover {
+    background-color: #c4c4c4; /* slate-200 */
+}
+.nav-link.active {
+    background-color: #3e003c; /* sky-500 */
+    color: white;
+    font-weight: 600;
+}
+.nav-link .icon {
+    margin-right: 0.75rem;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+.content-section {
+    display: none;
+}
+.content-section.active {
+    display: block;
+}
+.card {
+    background-color: #faf4fa;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    padding: 1.5rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
