@@ -21,8 +21,8 @@
 
     <div class="flex h-screen bg-slate-50">
         <!-- Sidebar Navigation -->
-        <aside class="w-64 border-r border-slate-200 p-4 flex-shrink-0" style="background-color: #3e003c;">
-            <h1 class="text-2xl font-bold text-sky-600 mb-8">Aula Virtual</h1>
+        <aside class="w-64 border-r border-slate-200 p-4 flex-shrink-0">
+            <h1 class="text-4xl font-bold mb-8 text-white px-2 py-1 rounded" style="background-color: #3e003c;">Aula Virtual</h1>
             <nav class="flex flex-col space-y-2">
                 <a href="#inicio" class="nav-link active" data-target="inicio">
                     <span class="icon">🏠</span> Inicio
@@ -52,7 +52,7 @@
             <!-- Inicio / Dashboard Section -->
             <section id="inicio-content" class="content-section active">
                 <div class="mb-8">
-                    <h2 class="text-3xl font-bold text-slate-800">Bienvenidos a Emprende Tu Carrera</h2>
+                    <h2 class="text-3xl font-bold" style="color: #3e003c;">Bienvenidos a Emprende Tu Carrera</h2>
                     <p class="text-slate-500 mt-1">Este es tu panel de control. Desde aquí puedes seguir tu progreso y acceder a todo lo que necesitas.</p>
                 </div>
                 
@@ -60,15 +60,15 @@
                     <!-- Left Column: Progress -->
                     <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="card">
-                            <h3 class="font-semibold mb-1 text-slate-700">Mi Ruta de Aprendizaje</h3>
+                            <h3 class="font-semibold mb-1" style="color: #3e003c;">Mi Ruta de Aprendizaje</h3>
                             <p class="text-sm text-slate-500 mb-4">Progreso general del curso</p>
                             <div class="w-full bg-slate-200 rounded-full h-2.5 mb-2">
-                                <div class="bg-sky-500 h-2.5 rounded-full" style="width: 45%"></div>
+                                <div class=" h-2.5 rounded-full" style="width: 45%; background-color: #3e003c;"></div>
                             </div>
-                            <p class="text-right font-semibold text-sky-600">45% Completado</p>
+                            <p class="text-right font-semibold" style="color: #3e003c;">45% Completado</p>
                         </div>
                         <div class="card">
-                             <h3 class="font-semibold mb-1 text-slate-700">Puntos y Medallas</h3>
+                             <h3 class="font-semibold mb-1" style="color: #3e003c;">Puntos y Medallas</h3>
                              <p class="text-sm text-slate-500 mb-4">¡Gana recompensas al aprender!</p>
                              <div class="flex items-center justify-between">
                                  <div class="text-center">
@@ -78,24 +78,24 @@
                                  <div class="flex space-x-3">
                                      <span class="text-3xl" title="Módulo 1 Completado">🥇</span>
                                      <span class="text-3xl" title="Colaborador Activo">💬</span>
-                                     <span class="text-3xl opacity-30" title="Experto en Producto">🏆</span>
+                                     <span class="text-3xl" title="Experto en Producto">🏆</span>
                                  </div>
                              </div>
                         </div>
                         <div class="md:col-span-2 card">
-                            <h3 class="font-semibold mb-1 text-slate-700">Agenda de la Semana</h3>
+                            <h3 class="font-semibold mb-1" style="color: #3e003c;">Agenda de la Semana</h3>
                             <p class="text-sm text-slate-500 mb-4">Sesiones en vivo programadas. ¡No te las pierdas!</p>
                             <ul class="space-y-3">
                                 <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
                                     <div>
-                                        <p class="font-medium">Webinar: Introducción al Producto</p>
+                                        <p class="font-medium" style="color: #3e003c;">Webinar: Introducción al Producto</p>
                                         <p class="text-sm text-slate-500">Lunes, 10:00 AM</p>
                                     </div>
-                                    <button class="bg-sky-500 text-white font-bold py-1 px-3 rounded-full text-sm">Unirse</button>
+                                    <button class="text-white font-bold py-1 px-3 rounded-full text-sm" style="background-color: #3e003c;">Unirse</button>
                                 </li>
                                 <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
                                     <div>
-                                        <p class="font-medium">Q&A con el Equipo de Producto</p>
+                                        <p class="font-medium" style="color: #3e003c;">Q&A con el Equipo de Producto</p>
                                         <p class="text-sm text-slate-500">Miércoles, 2:00 PM</p>
                                     </div>
                                     <button class="bg-slate-200 text-slate-600 font-bold py-1 px-3 rounded-full text-sm">Pronto</button>
@@ -106,7 +106,7 @@
                     
                     <!-- Right Column: Chart -->
                     <div class="card flex flex-col">
-                        <h3 class="font-semibold mb-1 text-slate-700">Progreso por Módulo</h3>
+                        <h3 class="font-semibold mb-1" style="color: #3e003c;">Progreso por Módulo</h3>
                         <p class="text-sm text-slate-500 mb-4">Un vistazo a las áreas completadas.</p>
                         <div class="chart-container flex-grow">
                             <canvas id="progressChart"></canvas>
@@ -118,7 +118,7 @@
             <!-- Módulos Section -->
             <section id="modulos-content" class="content-section">
                  <div class="mb-8">
-                    <h2 class="text-3xl font-bold text-slate-800">Módulos de Aprendizaje del Producto</h2>
+                    <h2 class="text-3xl font-bold" style="color: #3e003c;">Módulos de Aprendizaje del Producto</h2>
                     <p class="text-slate-500 mt-1">Este es el núcleo de tu capacitación. Cada módulo está diseñado para que aprendas, practiques y domines una parte de nuestro producto.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="modules-list">
@@ -132,7 +132,7 @@
             <!-- Colaboración Section -->
             <section id="colaboracion-content" class="content-section">
                 <div class="mb-8">
-                    <h2 class="text-3xl font-bold text-slate-800">Espacio de Colaboración</h2>
+                    <h2 class="text-3xl font-bold " style="color: #3e003c;">Espacio de Colaboración</h2>
                     <p class="text-slate-500 mt-1">Aprender es mejor en equipo. Utiliza estas herramientas para conectar con tus compañeros y los expertos del producto.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -157,7 +157,7 @@
             <!-- Recursos Section -->
             <section id="recursos-content" class="content-section">
                  <div class="mb-8">
-                    <h2 class="text-3xl font-bold text-slate-800">Biblioteca de Recursos</h2>
+                    <h2 class="text-3xl font-bold" style="color: #3e003c;">Biblioteca de Recursos</h2>
                     <p class="text-slate-500 mt-1">Todo lo que necesitas, en un solo lugar. Usa el buscador para encontrar rápidamente manuales, guías y respuestas.</p>
                 </div>
                 <div class="mb-6">

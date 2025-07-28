@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
             datasets: [{
                 data: [45, 55],
                 backgroundColor: [
-                    '#0EA5E9', // sky-500
-                    '#E2E8F0'  // slate-200
+                    '#efb810', // sky-500
+                    '#fff2caff'  // slate-200
                 ],
                 borderColor: '#FFFFFF',
                 borderWidth: 4,
@@ -100,10 +100,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         }">${module.status}</span>
                     </div>
                     <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="h-2 rounded-full ${
-                            module.progress > 0 ? 'bg-sky-500' : ''
-                        }" style="width: ${module.progress}%"></div>
-                    </div>
+                    <div class="h-2 rounded-full" style="width: ${module.progress}%; background-color: #3e003c;"></div>
+                </div>
                 </div>
             `;
             modulesListContainer.innerHTML += cardHTML;
@@ -114,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const module = modulesData.find(m => m.id === moduleId);
         if (!module) return;
 
-        let detailHTML = `<h3 class="text-2xl font-bold mb-6">Estructura de: ${module.title}</h3><ol class="relative border-l border-slate-200 ml-4">`;
+        let detailHTML = `<h3 class="text-2xl font-bold mb-6" style="color: #3e003c;">Estructura de: ${module.title}</h3><ol class="relative border-l border-slate-200 ml-4">`;
         moduleDetailStructure.forEach(item => {
             detailHTML += `
                 <li class="mb-10 ml-6">            
@@ -176,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <p class="text-sm text-slate-500">${item.category}</p>
                         </div>
                     </div>
-                    <button class="text-sky-600 font-semibold text-sm">Ver</button>
+                    <button class="font-semibold text-sm" style="color: #3e003c;">Ver</button>
                 </li>
             `;
             resourcesList.innerHTML += itemHTML;
