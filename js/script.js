@@ -2,6 +2,39 @@ document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.querySelectorAll('.nav-link');
     const contentSections = document.querySelectorAll('.content-section');
 
+    // --- Funciones para el manejo de Cookies ---
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (JSON.stringify(value) || "")  + expires + "; path=/";
+}
+
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) {
+            const value = c.substring(nameEQ.length, c.length);
+            try {
+                return JSON.parse(value);
+            } catch (e) {
+                return value;
+            }
+        }
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    document.cookie = name+'=; Max-Age=-99999999;';
+}
+// --- Fin de las funciones para Cookies ---
     // Navigation Logic
     function navigateTo(targetId) {
         contentSections.forEach(section => {
@@ -66,13 +99,47 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Modules Data & Logic
-    const modulesData = [
-        { id: 1, title: 'Módulo 1: Fundamentos del Producto', progress: 100, status: 'Completado' },
-        { id: 2, title: 'Módulo 2: Características Principales', progress: 75, status: 'En Progreso' },
-        { id: 3, title: 'Módulo 3: Casos de Uso Avanzados', progress: 10, status: 'No Iniciado' },
-        { id: 4, title: 'Módulo 4: Integraciones y API', progress: 0, status: 'Bloqueado' },
-        { id: 5, title: 'Módulo 5: Soporte y Troubleshooting', progress: 0, status: 'Bloqueado' },
+    const initialModulesData = [
+    { id: 1, title: 'Módulo 1: Fundamentos del Producto', progress: 0, status: 'No Iniciado' },
+    { id: 2, title: 'Módulo 2: Características Principales', progress: 0, status: 'Bloqueado' },
+    { id: 3, title: 'Módulo 3: Casos de Uso Avanzados', progress: 0, status: 'Bloqueado' },
+    { id: 4, title: 'Módulo 4: Integraciones y API', progress: 0, status: 'Bloqueado' },
+    { id: 5, title: 'Módulo 5: Soporte y Troubleshooting', progress: 0, status: 'Bloqueado' },
     ];
+    // Intenta cargar el progreso desde la cookie, si no existe, usa los datos iniciales.
+    let modulesData = getCookie('studentProgress') || initialModulesData;
+
+    function updateModuleProgress(moduleId, newProgress) {
+        const module = modulesData.find(m => m.id === moduleId);
+        if (module) {
+            module.progress = newProgress;
+            if (newProgress === 100) {
+                module.status = 'Completado';
+
+                // --- LÓGICA DE DESBLOQUEO AÑADIDA ---
+                // Buscar el siguiente módulo en la secuencia
+                const nextModuleId = moduleId + 1;
+                const nextModule = modulesData.find(m => m.id === nextModuleId);
+
+                // Si existe un siguiente módulo y está bloqueado, desbloquéalo.
+                if (nextModule && nextModule.status === 'Bloqueado') {
+                    nextModule.status = 'No Iniciado';
+                }
+                // --- FIN DE LA LÓGICA DE DESBLOQUEO ---
+
+            } else if (newProgress > 0) {
+                module.status = 'En Progreso';
+            } else {
+                module.status = 'No Iniciado';
+            }
+
+            // Guarda el array actualizado en la cookie
+            setCookie('studentProgress', modulesData, 30);
+
+            // Vuelve a renderizar los módulos para reflejar el cambio
+            renderModules();
+        }
+    }
 
     const moduleDetailStructure = [
         { step: 1, title: 'Introducción (Video)', icon: '▶️', desc: 'Un video corto de 2-3 minutos sobre los objetivos del módulo.' },
@@ -133,7 +200,18 @@ document.addEventListener('DOMContentLoaded', function () {
         const card = e.target.closest('.card');
         if (card && !card.classList.contains('cursor-not-allowed')) {
             const moduleId = parseInt(card.dataset.moduleId);
+            
+            // Muestra los detalles del módulo como antes
             renderModuleDetail(moduleId);
+
+            // --- SIMULACIÓN DE PROGRESO ---
+            // Aumenta el progreso en 25 cada vez que se hace clic.
+            const currentModule = modulesData.find(m => m.id === moduleId);
+            if (currentModule && currentModule.progress < 100) {
+                const newProgress = Math.min(currentModule.progress + 25, 100);
+                // Llama a la nueva función para actualizar y guardar en la cookie
+                updateModuleProgress(moduleId, newProgress);
+            }
         }
     });
 
@@ -186,4 +264,22 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     renderResources();
+
+// Botón para reiniciar el progreso
+const resetButton = document.getElementById('reset-progress');
+if (resetButton) {
+    resetButton.addEventListener('click', function() {
+        if (confirm('¿Estás seguro de que quieres borrar todo tu progreso?')) {
+            // Reinicia los datos al estado inicial definido
+            modulesData = JSON.parse(JSON.stringify(initialModulesData));
+
+            // Guarda este estado reseteado en la cookie
+            setCookie('studentProgress', modulesData, 30);
+            
+            // Recarga la página para ver los cambios
+            window.location.reload();
+        }
+    });
+}
 });
+
